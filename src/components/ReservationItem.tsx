@@ -5,9 +5,10 @@ interface ReservationItemProps {
   reservation: Reservation;
   onUpdate: (id: number, status: Reservation['status']) => void;
   onDelete: (id: number) => void;
+  onEdit: (reservation: Reservation) => void;
 }
 
-const ReservationItem: React.FC<ReservationItemProps> = ({ reservation, onUpdate, onDelete }) => {
+const ReservationItem: React.FC<ReservationItemProps> = ({ reservation, onUpdate, onDelete, onEdit }) => {
   const statusOptions: { [key in Reservation['status']]: { bg: string, text: string } } = {
     pending: { bg: 'bg-yellow-400', text: '⏳' },
     confirmed: { bg: 'bg-green-500', text: '✅' },
@@ -30,12 +31,21 @@ const ReservationItem: React.FC<ReservationItemProps> = ({ reservation, onUpdate
           </button>
         ))}
       </div>
-      <button
-        onClick={() => onDelete(reservation.id)}
-        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Delete
-      </button>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => onEdit(reservation)}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+        >
+          Edit
+        </button>
+
+        <button
+          onClick={() => onDelete(reservation.id)}
+          className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   )
 }

@@ -6,9 +6,10 @@ interface ReservationListProps {
   reservations: Reservation[];
   onUpdate: (id: number, status: Reservation['status']) => void;
   onDelete: (id: number) => void;
+  onEdit: (reservation: Reservation) => void;
 }
 
-const ReservationList: React.FC<ReservationListProps> = ({ reservations, onUpdate, onDelete }) => {
+const ReservationList: React.FC<ReservationListProps> = ({ reservations, onUpdate, onDelete, onEdit }) => {
   return (
 <div className="container mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-7">
         {reservations.map((reservation) => (
@@ -17,6 +18,7 @@ const ReservationList: React.FC<ReservationListProps> = ({ reservations, onUpdat
             reservation={reservation}
             onUpdate={onUpdate}
             onDelete={onDelete}
+            onEdit={onEdit}
           />
         ))}
       </div>
